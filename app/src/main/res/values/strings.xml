@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Гео-справочник</string>
+
+    <string name="groups.title">Регионы</string>
+
+    <string name="contact.detail.title">Подробная информация</string>
+    <string name="contact.full_name">Название:</string>
+    <string name="contact.comment">Комментарий:</string>
+    <string name="contact.address">Адрес:</string>
+    <string name="contact.region">Регион:</string>
+    <string name="contact.group">Группа:</string>
+
+    <string name="settings.title">Настройки</string>
+    <string name="settings.action.save">Сохранить БД в файл</string>
+    <string name="settings.action.load">Обновить БД из файла</string>
+</resources>

@@ -1,0 +1,143 @@
+ext {
+
+    versions = [
+            kotlin           : '1.1.1',
+            anko             : '0.9',
+            androidSupport   : '25.3.1',
+            constraint_layout: '1.0.2',
+            playServices     : '10.0.1',
+            firebase         : '10.0.1',
+            fresco           : '0.14.1',
+            photodraweeview  : '1.0.0',
+            butterknife      : '8.5.1',
+            retrofit         : '2.2.0',
+            okhttp           : '3.6.0',
+            cookieJar        : 'v1.0.0',
+            threetenabp      : '1.0.3',
+            VK               : '1.6.5',
+            facebook         : '4.14.0',
+            rxJava           : '1.2.9',
+            rxAndroid        : '1.2.1',
+            stetho           : '1.4.1',
+            swipe_layout     : '1.0.13',
+            videocache       : '2.6.3',
+            calendar_view    : '1.9.4',
+            bottom_bar       : '2.0.2',
+            storio           : '1.12.3',
+            junit            : '4.12',
+            assertj          : '3.5.2',
+            mockito          : '2.7.21',
+            robolectric      : '3.3.2',
+            adapter_delegates: '3.0.1',
+            inputmask        : '2.2.1',
+            permissions      : '2.3.2',
+    ]
+
+    kotlin = [
+            plugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+            stdlib : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
+            runtime: "org.jetbrains.kotlin:kotlin-runtime:${versions.kotlin}"
+    ]
+
+    rx = [
+            java           : "io.reactivex:rxjava:${versions.rxJava}",
+            android        : "io.reactivex:rxandroid:${versions.rxAndroid}",
+            retrofitAdapter: "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}"
+    ]
+
+    anko = [
+            sdk15       : "org.jetbrains.anko:anko-sdk15:${versions.anko}",
+            support     : "org.jetbrains.anko:anko-support-v4:${versions.anko}",
+            appcompat   : "org.jetbrains.anko:anko-appcompat-v7:${versions.anko}",
+            recyclerView: "org.jetbrains.anko:anko-recyclerview-v7:${versions.anko}",
+            cardView    : "org.jetbrains.anko:anko-cardview-v7:${versions.anko}",
+            design      : "org.jetbrains.anko:anko-design:${versions.anko}",
+    ]
+
+    android = [
+            design           : "com.android.support:design:${versions.androidSupport}",
+            support_all      : "com.android.support:support-v4:${versions.androidSupport}",
+            support_compat   : "com.android.support:support-compat:${versions.androidSupport}",
+            support_utils    : "com.android.support:support-core-utils:${versions.androidSupport}",
+            support_ui       : "com.android.support:support-core-ui:${versions.androidSupport}",
+            support_media    : "com.android.support:support-media-compat:${versions.androidSupport}",
+            support_fragments: "com.android.support:support-fragment:${versions.androidSupport}",
+            appcompat        : "com.android.support:appcompat-v7:${versions.androidSupport}",
+            recyclerView     : "com.android.support:recyclerview-v7:${versions.androidSupport}",
+            cardView         : "com.android.support:cardview-v7:${versions.androidSupport}",
+            grid_layout      : "com.android.support:gridlayout-v7:${versions.androidSupport}",
+            constraint_layout: 'com.android.support.constraint:constraint-layout:1.0.1',
+    ]
+
+    fresco = [
+            fresco         : "com.facebook.fresco:fresco:${versions.fresco}",
+            imagepipeline  : "com.facebook.fresco:imagepipeline-okhttp3:${versions.fresco}",
+            photodraweeview: "me.relex:photodraweeview:${versions.photodraweeview}",
+    ]
+
+    network = [
+            retrofit     : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            converterGson: "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            okhttpLogging: "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+            cookieJar    : "com.github.franmontiel:PersistentCookieJar:${versions.cookieJar}",
+    ]
+
+    stetho = [
+            stetho: "com.facebook.stetho:stetho:${versions.stetho}",
+            okhttp: "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+    ]
+
+    storio = [
+            sqlite            : "com.pushtorefresh.storio:sqlite:${versions.storio}",
+            sqlite_annotations: "com.pushtorefresh.storio:sqlite-annotations:${versions.storio}",
+            sqlite_processor  : "com.pushtorefresh.storio:sqlite-annotations-processor:${versions.storio}",
+    ]
+
+    helpers = [
+            threetenabp         : "com.jakewharton.threetenabp:threetenabp:${versions.threetenabp}",
+            butterknife         : "com.jakewharton:butterknife:${versions.butterknife}",
+            butterknife_compiler: "com.jakewharton:butterknife-compiler:${versions.butterknife}",
+            swipe_layout        : "ru.rambler.android:swipe-layout:${versions.swipe_layout}",
+            adapter_delegates   : "com.hannesdorfmann:adapterdelegates3:${versions.adapter_delegates}",
+            inputmask           : "com.redmadrobot:inputmask:${versions.inputmask}",
+            permissions         : "com.github.hotchemi:permissionsdispatcher:${versions.permissions}",
+            permissionsAP       : "com.github.hotchemi:permissionsdispatcher-processor:${versions.permissions}",
+    ]
+
+    google = [
+            analytics: "com.google.android.gms:play-services-analytics:${versions.playServices}",
+            maps     : "com.google.android.gms:play-services-maps:${versions.playServices}",
+            fcm      : "com.google.firebase:firebase-messaging:${versions.firebase}",
+    ]
+
+    social = [
+            vkSdk   : "com.vk:androidsdk:${versions.VK}",
+            facebook: [
+                    sdk     : "com.facebook.android:facebook-android-sdk:${versions.facebook}",
+                    excluded: [
+                            modules: [
+                                    'bolts-android',
+                                    'bolts-tasks',
+                                    'bolts-applinks',
+                                    'support-v4',
+                            ]
+                    ]
+            ]
+    ]
+
+    video = [
+            cache: "com.danikula:videocache:${versions.videocache}"
+    ]
+
+    views = [
+            calendar  : "com.github.sundeepk:compact-calendar-view:${versions.calendar_view}",
+            bottom_bar: "com.roughike:bottom-bar:${versions.bottom_bar}",
+    ]
+
+    tests = [
+            junit      : "junit:junit:${versions.junit}",
+            assertj    : "org.assertj:assertj-core:${versions.assertj}",
+            mockito    : "org.mockito:mockito-core:${versions.mockito}",
+            robolectric: "org.robolectric:robolectric:${versions.robolectric}",
+    ]
+}
