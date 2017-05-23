@@ -35,4 +35,20 @@ public class ContactDetailsEntity {
     public String getValue() {
         return value;
     }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

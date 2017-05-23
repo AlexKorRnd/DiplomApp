@@ -20,6 +20,8 @@ public class Contact implements Parcelable {
 
     private List<DetailType> detailTypes;
 
+    private Group group;
+
     public Contact(String id, Region region, String fullName, String comment, String address) {
         this.id = id;
         this.region = region;
@@ -35,6 +37,7 @@ public class Contact implements Parcelable {
         comment = in.readString();
         address = in.readString();
         detailTypes = in.createTypedArrayList(DetailType.CREATOR);
+        group = in.readParcelable(Group.class.getClassLoader());
     }
 
     @Override
@@ -45,6 +48,7 @@ public class Contact implements Parcelable {
         dest.writeString(comment);
         dest.writeString(address);
         dest.writeTypedList(detailTypes);
+        dest.writeParcelable(group, flags);
     }
 
     @Override
@@ -110,5 +114,13 @@ public class Contact implements Parcelable {
 
     public void setDetailTypes(List<DetailType> detailTypes) {
         this.detailTypes = detailTypes;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

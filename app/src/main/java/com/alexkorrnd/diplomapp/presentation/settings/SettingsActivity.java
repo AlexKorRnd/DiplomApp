@@ -96,7 +96,7 @@ public class SettingsActivity extends BaseActivity {
         dbOpenHelper.setExternalDBPath(path);
         try {
             dbOpenHelper.saveDataBase();
-            Toast.makeText(this, "БД успешно сохранена в файл", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "БД успешно сохранена в файл в папку geoPhone в корне файловой системы", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "При сохранении БД произошла ошибка", Toast.LENGTH_LONG).show();

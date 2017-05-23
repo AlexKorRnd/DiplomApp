@@ -70,4 +70,9 @@ public class Group implements Parcelable {
     public void setShortTitle(String shortTitle) {
         this.shortTitle = shortTitle;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

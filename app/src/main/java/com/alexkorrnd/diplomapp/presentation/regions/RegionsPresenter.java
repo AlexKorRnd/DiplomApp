@@ -2,10 +2,12 @@ package com.alexkorrnd.diplomapp.presentation.regions;
 
 
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionsWithParentEntity;
+import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionEntity;
 import com.alexkorrnd.diplomapp.data.db.groups.tables.RegionsTable;
 import com.alexkorrnd.diplomapp.domain.Region;
+import com.alexkorrnd.diplomapp.domain.mappers.Mapper;
 import com.alexkorrnd.diplomapp.presentation.BasePresenter;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
@@ -14,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Single;
-
-import static com.alexkorrnd.diplomapp.domain.mappers.Mapper.mapTo;
 
 public class RegionsPresenter implements BasePresenter {
 
@@ -26,6 +26,8 @@ public class RegionsPresenter implements BasePresenter {
         void onNavigateToRegions(Region region);
         void onNavigateToContacts(Region region);
     }
+
+    private final static String TAG = RegionsPresenter.class.getSimpleName();
 
     private final static int PAGE_SIZE = 15;
 
@@ -51,31 +53,40 @@ public class RegionsPresenter implements BasePresenter {
     }
 
     public void loadRegions(int offset) {
-        getRegions(offset)
-                .subscribe(groups -> {
+        getRegions(parentId, offset)
+                .subscribe(regions -> {
                     view.hideProgress();
-                    view.onRegionsLoadedSuccess(listMapTo(groups));
+                    view.onRegionsLoadedSuccess(listMapTo(regions));
                 });
     }
 
-    private Single<List<RegionsWithParentEntity>> getRegions(int offset) {
+    private Single<List<RegionEntity>> getRegions(String parentId, int offset) {
+        String whereQuery = RegionsTable.COLUMN_PARENT_ID + " =?";
+        if (parentId == null) {
+            whereQuery += " OR " + RegionsTable.COLUMN_PARENT_ID + " = \"\"";
+        }
+        Query query = Query.builder()
+                .table(RegionsTable.TABLE)
+                .limit(offset, PAGE_SIZE)
+                .where(whereQuery)
+                .whereArgs(parentId)
+                .orderBy(RegionsTable.COLUMN_TITLE)
+                .build();
+        Log.d(TAG, query.toString());
         return storIOSQLite
                 .get()
-                .listOfObjects(RegionsWithParentEntity.class)
-                .withQuery(Query.builder()
-                        .table(RegionsTable.TABLE)
-                        .limit(offset, PAGE_SIZE)
-                        .where(RegionsTable.COLUMN_PARENT_ID + " =?")
-                        .whereArgs(parentId)
-                        .build())
+                .listOfObjects(RegionEntity.class)
+                .withQuery(query)
                 .prepare()
                 .asRxSingle();
     }
 
-    private static List<Region> listMapTo(List<RegionsWithParentEntity> entities) {
+
+
+    private static List<Region> listMapTo(List<RegionEntity> entities) {
         final List<Region> regions = new ArrayList<>();
-        for (RegionsWithParentEntity entity: entities) {
-            regions.add(mapTo(entity));
+        for (RegionEntity entity: entities) {
+            regions.add(Mapper.mapTo(entity));
         }
         return regions;
     }
@@ -83,7 +94,8 @@ public class RegionsPresenter implements BasePresenter {
 
 
     public void navigateToNextScreen(Region region) {
-        getRegions(0)
+        setParentId(region.getGid());
+        getRegions(parentId, 0)
                 .subscribe(groups -> {
                     if (groups.isEmpty()) {
                         view.onNavigateToContacts(region);

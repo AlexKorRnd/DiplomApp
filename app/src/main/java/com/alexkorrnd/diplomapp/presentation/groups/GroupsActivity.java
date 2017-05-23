@@ -18,7 +18,6 @@ import com.alexkorrnd.diplomapp.R;
 import com.alexkorrnd.diplomapp.domain.Group;
 import com.alexkorrnd.diplomapp.presentation.base.BaseActivity;
 import com.alexkorrnd.diplomapp.presentation.internal.di.DbModule;
-import com.alexkorrnd.diplomapp.presentation.regions.RegionsActivity;
 import com.alexkorrnd.diplomapp.presentation.settings.SettingsActivity;
 
 import java.util.List;
@@ -109,6 +108,6 @@ public class GroupsActivity extends BaseActivity implements
     @Override
     public void onItemClick(int adapterPosition) {
         final Group group = (Group) adapter.getItem(adapterPosition);
-        startActivity(RegionsActivity.createIntent(this, group.getGid(), group.getTitle()));
+      //  startActivity(RegionsActivity.createIntent(this, group.getGid(), group.getTitle()));
     }
 }

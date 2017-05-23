@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.alexkorrnd.diplomapp.data.db.groups.entity.GroupEntity;
 import com.alexkorrnd.diplomapp.data.db.groups.tables.RegionsTable;
 import com.alexkorrnd.diplomapp.domain.Group;
+import com.alexkorrnd.diplomapp.domain.mappers.Mapper;
 import com.alexkorrnd.diplomapp.presentation.BasePresenter;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
@@ -14,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.functions.Action1;
-
-import static com.alexkorrnd.diplomapp.domain.mappers.Mapper.mapTo;
 
 
 public class GroupsPresenter implements BasePresenter {
@@ -65,7 +64,7 @@ public class GroupsPresenter implements BasePresenter {
     private List<Group> listMapTo(List<GroupEntity> groupEntities) {
         final List<Group> groups = new ArrayList<>();
         for (GroupEntity groupEntity: groupEntities) {
-            groups.add(mapTo(groupEntity));
+            groups.add(Mapper.mapTo(groupEntity));
         }
         return groups;
     }

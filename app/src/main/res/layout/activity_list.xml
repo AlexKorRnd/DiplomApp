@@ -4,12 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray.300"
     >
+
+    <!--Dummy SupportMapFragment to prevent lags,
+       caused by first initialization.
+       http://stackoverflow.com/questions/26178212/first-launch-of-activity-with-google-maps-is-very-slow-->
+    <fragment
+        android:id="@+id/dummy_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:elevation="4dp"
         />
+
+
 
 </FrameLayout>

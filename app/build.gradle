@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
+apply plugin: 'kotlin-android'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -34,7 +34,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
 
     Map<String, String> android = rootProject.ext.android
     compile(
@@ -47,12 +46,6 @@ dependencies {
             android.grid_layout
     )
 
-    Map<String, String> rx = rootProject.ext.rx
-    compile(
-            rx.java,
-            rx.android,
-    )
-
     Map<String, String> storio = rootProject.ext.storio
     compile(
             storio.sqlite,
@@ -61,8 +54,36 @@ dependencies {
     annotationProcessor storio.sqlite_processor
 
 
+    Map<String, String> network = rootProject.ext.network
+    compile(
+            network.retrofit,
+            network.converterGson,
+            network.okhttpLogging,
+//            network.cookieJar
+    )
+
+    Map<String, String> rx = rootProject.ext.rx
+    compile(
+            rx.java,
+            rx.android,
+            rx.retrofitAdapter,
+    )
+
+    Map<String, String> stetho = rootProject.ext.stetho
+    compile(
+            stetho.stetho,
+            stetho.okhttp,
+    )
+
     Map<String, String> helpers = rootProject.ext.helpers
     compile(
             helpers.adapter_delegates,
     )
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.google.android.gms:play-services-maps:10.2.4'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}
+repositories {
+    mavenCentral()
 }

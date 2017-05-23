@@ -16,11 +16,8 @@ import com.alexkorrnd.diplomapp.data.db.contact.entity.DetailTypeEntity;
 import com.alexkorrnd.diplomapp.data.db.contact.entity.DetailTypeEntitySQLiteTypeMapping;
 import com.alexkorrnd.diplomapp.data.db.groups.entity.GroupEntity;
 import com.alexkorrnd.diplomapp.data.db.groups.entity.GroupEntitySQLiteTypeMapping;
-import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionsWithParentEntity;
-import com.alexkorrnd.diplomapp.data.db.groups.resolver.RegionWithGroupDeleteResolver;
-import com.alexkorrnd.diplomapp.data.db.groups.resolver.RegionWithGroupGetResolver;
-import com.alexkorrnd.diplomapp.data.db.groups.resolver.RegionWithGroupPutResolver;
-import com.pushtorefresh.storio.sqlite.SQLiteTypeMapping;
+import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionEntity;
+import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionEntitySQLiteTypeMapping;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.impl.DefaultStorIOSQLite;
 
@@ -48,12 +45,7 @@ public final class DbModule {
                 if (storIOSQLite == null) {
                     storIOSQLite = DefaultStorIOSQLite.builder()
                             .sqliteOpenHelper(sqLiteOpenHelper)
-                            .addTypeMapping(RegionsWithParentEntity.class, SQLiteTypeMapping.<RegionsWithParentEntity>builder()
-                                    .putResolver(new RegionWithGroupPutResolver())
-                                    .getResolver(new RegionWithGroupGetResolver())
-                                    .deleteResolver(new RegionWithGroupDeleteResolver())
-                                    .build()
-                            )
+                            .addTypeMapping(RegionEntity.class, new RegionEntitySQLiteTypeMapping())
                             .addTypeMapping(GroupEntity.class, new GroupEntitySQLiteTypeMapping())
                             .addTypeMapping(ContactEntity.class, new ContactEntitySQLiteTypeMapping())
                             .addTypeMapping(DetailTypeEntity.class, new DetailTypeEntitySQLiteTypeMapping())

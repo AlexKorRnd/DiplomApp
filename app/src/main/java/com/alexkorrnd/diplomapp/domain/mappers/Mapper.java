@@ -6,7 +6,6 @@ import com.alexkorrnd.diplomapp.data.db.contact.entity.ContactEntity;
 import com.alexkorrnd.diplomapp.data.db.contact.entity.DetailTypeEntity;
 import com.alexkorrnd.diplomapp.data.db.groups.entity.GroupEntity;
 import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionEntity;
-import com.alexkorrnd.diplomapp.data.db.groups.entity.RegionsWithParentEntity;
 import com.alexkorrnd.diplomapp.domain.Contact;
 import com.alexkorrnd.diplomapp.domain.DetailType;
 import com.alexkorrnd.diplomapp.domain.Group;
@@ -18,12 +17,11 @@ public class Mapper {
         return new Group(entity.getGid(), entity.getTitle(), entity.getShortTitle());
     }
 
-    public static Region mapTo(RegionsWithParentEntity entity) {
-        final RegionEntity regionEntity = entity.getRegionEntity();
+    public static Region mapTo(RegionEntity regionEntity) {
         return new Region(regionEntity.getGid(),
                 regionEntity.getTitle(),
                 regionEntity.getShortTitle(),
-                mapTo(entity.getGroupEntity())
+                regionEntity.getParentId()
         );
     }
 
@@ -31,10 +29,14 @@ public class Mapper {
         return new Contact(entity.getKey(), null, entity.getFullName(), entity.getComment(), entity.getAddress());
     }
 
+    public static DetailType mapTo(DetailTypeEntity entity) {
+        return new DetailType(null, entity.getKey(), entity.getTitle(), entity.getShortTitle());
+    }
 
     public static DetailType mapTo(DetailTypeEntity detailTypeEntity,
                                    ContactDetailsEntity contactDetailsEntity) {
-        return new DetailType(detailTypeEntity.getKey(),
+        return new DetailType(contactDetailsEntity.getGid(),
+                detailTypeEntity.getKey(),
                 detailTypeEntity.getTitle(),
                 detailTypeEntity.getShortTitle(),
                 contactDetailsEntity.getValue()

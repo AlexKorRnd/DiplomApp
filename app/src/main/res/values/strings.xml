@@ -4,13 +4,20 @@
     <string name="groups.title">Регионы</string>
 
     <string name="contact.detail.title">Подробная информация</string>
-    <string name="contact.full_name">Название:</string>
+    <string name="contact.full_name">Имя:</string>
     <string name="contact.comment">Комментарий:</string>
     <string name="contact.address">Адрес:</string>
     <string name="contact.region">Регион:</string>
     <string name="contact.group">Группа:</string>
+    <string name="contact.action.save">Сохранить</string>
+    <string name="contact.action.edit">Изменить</string>
 
     <string name="settings.title">Настройки</string>
-    <string name="settings.action.save">Сохранить БД в файл</string>
+    <string name="settings.action.save">Копировать БД в файл</string>
     <string name="settings.action.load">Обновить БД из файла</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="maps.error.default">Не получилось найти данный адрес на карте.</string>
+
+
 </resources>

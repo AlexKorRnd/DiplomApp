@@ -3,27 +3,33 @@ package com.alexkorrnd.diplomapp.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
-public class Region implements Parcelable {
-    String gid;
+public class Region implements Parcelable{
+    private String gid;
 
-    String title;
-    String shortTitle;
+    private String title;
+    private String shortTitle;
 
-    Group group;
+    @Nullable
+    private String parentRegionId;
 
-    public Region(String gid, String title, String shortTitle, Group group) {
+    public Region(String gid, String title, String shortTitle) {
+        this(gid, title, shortTitle, null);
+    }
+
+    public Region(String gid, String title, String shortTitle, String parentRegionId) {
         this.gid = gid;
         this.title = title;
         this.shortTitle = shortTitle;
-        this.group = group;
+        this.parentRegionId = parentRegionId;
     }
 
     protected Region(Parcel in) {
         gid = in.readString();
         title = in.readString();
         shortTitle = in.readString();
-        group = in.readParcelable(Group.class.getClassLoader());
+        parentRegionId = in.readString();
     }
 
     @Override
@@ -31,7 +37,7 @@ public class Region implements Parcelable {
         dest.writeString(gid);
         dest.writeString(title);
         dest.writeString(shortTitle);
-        dest.writeParcelable(group, flags);
+        dest.writeString(parentRegionId);
     }
 
     @Override
@@ -63,10 +69,6 @@ public class Region implements Parcelable {
         this.shortTitle = shortTitle;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
     public String getGid() {
         return gid;
     }
@@ -79,7 +81,12 @@ public class Region implements Parcelable {
         return shortTitle;
     }
 
-    public Group getGroup() {
-        return group;
+    @Nullable
+    public String getParentRegionId() {
+        return parentRegionId;
+    }
+
+    public void setParentRegionId(@Nullable String parentRegionId) {
+        this.parentRegionId = parentRegionId;
     }
 }

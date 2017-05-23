@@ -18,7 +18,7 @@ public class RegionEntity {
     String shortTitle;
 
     @StorIOSQLiteColumn(name = RegionsTable.COLUMN_PARENT_ID)
-    String groupId;
+    String parentId;
 
     public String getGid() {
         return gid;
@@ -36,12 +36,12 @@ public class RegionEntity {
         this.title = title;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getShortTitle() {

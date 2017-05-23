@@ -37,13 +37,8 @@ public class ContactDelegate extends AbsListItemAdapterDelegate<Contact, Object,
     @NonNull
     @Override
     protected Holder onCreateViewHolder(@NonNull ViewGroup parent) {
-        final Holder holder = new Holder(inflater.inflate(R.layout.item_simple_text, parent, false));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.onItemClick(holder.getAdapterPosition());
-            }
-        });
+        final Holder holder = new Holder(inflater.inflate(R.layout.item_contact, parent, false));
+        holder.itemView.setOnClickListener(v -> callback.onItemClick(holder.getAdapterPosition()));
         return holder;
     }
 
